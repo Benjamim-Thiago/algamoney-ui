@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-search-postings',
-  templateUrl: './search-postings.component.html',
-  styleUrls: ['./search-postings.component.css']
+  selector: 'app-list-postings',
+  templateUrl: './list-postings.component.html',
+  styleUrls: ['./list-postings.component.css']
 })
-export class SearchPostingsComponent {
+export class ListPostingsComponent {
 
   postings = [
     { type: 'DESPESA', description: 'Compra de pão', expiration_date: '30/06/2017',

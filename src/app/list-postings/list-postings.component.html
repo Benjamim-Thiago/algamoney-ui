@@ -1,12 +1,11 @@
 <div class="container">
     <div class="ui-g">
       <div class="ui-g-12">
-        <h1>Lançamentos</h1>
+        <h2>Lançamentos</h2>
+        <button pButton type="button" icon="pi pi-file-o" label="Novo Lançamento"></button>
       </div>
-      <div class="ui-g-12">
-        <button pButton type="button" label="Novo Lançamento"></button>
-      </div>
-
+    </div>
+    <div class="ui-g">
       <div class="ui-g-12 ui-fluid">
         <label for="">Descrição</label>
         <input pInputText type="text" style="width:94%">
@@ -21,13 +20,13 @@
       </div>
 
       <div class="ui-g-12">
-        <button pButton type="submit" label="Pesquisar"></button>
+        <button pButton type="submit" icon="pi pi-search" label="Pesquisar"></button>
       </div>
     </div>
 
     <div class="ui-g">
       <div class="ui-g-12">
-        <p-table [value]="postings" [responsive]="true" [paginator]=true rows="4">
+        <p-table [value]="postings" [responsive]="true" [paginator]=true rows="3">
             <ng-template pTemplate="header">
                   <tr>
                       <th>Pessoa</th>
