@@ -49,17 +49,17 @@
                       </td>
                       <td class="col-date-content">
                         <span class="ui-column-title">Vencimento</span>
-                        {{posting.expiration_date}}
+                        {{posting.expiration_date | date:'dd/MM/y'}}
                       </td>
                       <td class="col-date-content">
                         <span class="ui-column-title">Pagamento</span>
-                        {{posting.payment_date}}
+                        {{posting.payment_date | date:'dd/MM/y'}}
                       </td>
                       <td class="col-value-content"
                         [style.color]="posting.type === 'DESPESA' ? 'red' : 'blue'"
                       >
                         <span class="ui-column-title">Valor</span>
-                        {{posting.value}}</td>
+                        {{posting.value | number: '1.2-2'}}</td>
                       <td class="col-acoes">
                         <span class="ui-column-title">Ações</span>
                         <a pButton icon="pi pi-pencil" class="ui-button-warning" pTooltip="Editar" tooltipPosition="top"></a>&nbsp;
