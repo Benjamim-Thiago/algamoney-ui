@@ -22,6 +22,8 @@ import { ListPeopleComponent } from './list-people/list-people.component';
 import { RegisterPostingComponent } from './register-posting/register-posting.component';
 import { RegisterPersonComponent } from './register-person/register-person.component';
 import { MessageComponent } from './message/message.component';
+import { PostingsGridComponent } from './postings-grid/postings-grid.component';
+import { PeopleGridComponent } from './people-grid/people-grid.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { MessageComponent } from './message/message.component';
     ListPeopleComponent,
     RegisterPostingComponent,
     RegisterPersonComponent,
-    MessageComponent
+    MessageComponent,
+    PostingsGridComponent,
+    PeopleGridComponent
   ],
   imports: [
     BrowserModule,

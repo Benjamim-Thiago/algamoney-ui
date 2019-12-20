@@ -15,46 +15,7 @@
 
   <div class="ui-g">
     <div class="ui-g-12">
-      <p-table [value]="people" [responsive]="true" [paginator]=true rows="3">
-          <ng-template pTemplate="header">
-                <tr>
-                  <th>Nome</th>
-                  <th>Cidade</th>
-                  <th>Estado</th>
-                  <th>Status</th>
-                  <th>Ações</th>
-                </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-person>
-                <tr>
-                    <td>
-                      <span class="ui-column-title">Pessoa</span>
-                      {{person.name}}
-                    </td>
-                    <td>
-                      <span class="ui-column-title">Cidade</span>
-                      {{person.city}}
-                    </td>
-                    <td>
-                      <span class="ui-column-title">Estado</span>
-                      {{person.state}}
-                    </td>
-                    <td>
-                      <span class="ui-column-title">Status</span>
-                      <a href="javascript:;" [pTooltip]="person.status ? 'Desativar' : 'Ativar'"
-                          tooltipPosition="top">
-                        {{person.status ? 'Ativo' : 'Inativo'}}
-                      </a>
-                    </td>
-
-                    <td class="col-acoes">
-                      <span class="ui-column-title">Ações</span>
-                      <a pButton icon="pi pi-pencil" class="ui-button-warning" pTooltip="Editar" tooltipPosition="top"></a>&nbsp;
-                      <button pButton icon="pi pi-trash" class="ui-button-danger" pTooltip="Excluir" tooltipPosition="top"></button>
-                    </td>
-                  </tr>
-            </ng-template>
-        </p-table>
-      </div>
+      <app-people-grid [people]="people"></app-people-grid>
     </div>
+  </div>
 </div>

@@ -4,7 +4,7 @@
       <h1>Novo Lançamento</h1>
     </div>
   </div>
-  <form>
+  <form #f="ngForm" autocomplete="off">
     <div class="ui-g">
       <div class="ui-g-12">
         <p-selectButton [options]="types" #type></p-selectButton>
@@ -17,8 +17,9 @@
           [readonlyInput]="true"
           [yearNavigator]="true"
           yearRange="1920:2030"
-          [showIcon]="true">
+          [showIcon]="true" name="expirationDate" ngModel #expiration="ngModel" required>
         </p-calendar>
+        <app-message [control]="expiration" error="required" text="Informe o vencimento"></app-message>
       </div>
       <div class="ui-g-6 ui-md-3 ui-fluid">
         <label for="">{{type.value == 'RECEITA' ? 'Recebimento' : 'Pagamento'}}</label>
@@ -43,14 +44,13 @@
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label for="">Valor</label>
         <input type="text" pInputText name="value" ngModel #value="ngModel"
-          currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' , allowNegative: false}"  required>
-          <app-message [control]="value" error="required" text="Informe a o valor"></app-message>
+          currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' , allowNegative: false}" required>
       </div>
     </div>
     <div class="ui-g">
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label for="">Categoria</label>
-        <p-dropdown [options]="categories" placeholder="Selecione"></p-dropdown>
+        <p-dropdown [options]="categories" placeholder="Selecione" name="category" ngModel #category="ngModel" required></p-dropdown>
       </div>
 
       <div class="ui-g-12 ui-md-6 ui-fluid">
@@ -65,7 +65,7 @@
       </div>
 
       <div class="ui-g-12">
-        <button pButton type="submit" label="Salvar" class="ui-button-success"></button>
+        <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="f.invalid"></button>
         &nbsp;
         <button pButton type="button" label="Novo" class="ui-button-info"></button>
         &nbsp;
