@@ -8,18 +8,27 @@
     <div class="ui-g">
       <div class="ui-g-12 ui-md-12 ui-fluid">
         <label for="">Nome</label>
-        <input type="text" pInputText>
+        <input type="text" pInputText name="name" ngModel #name="ngModel" required minlength="3">
+        <app-message [control]="name" error="required" text="Informe o Nome"></app-message>
+        <app-message [control]="name" error="minlength" text="informe no mínimo {{name.errors?.minlength?.requiredLength}} caracteres."></app-message>
       </div>
     </div>
     <div class="ui-g">
-      <div class="ui-g-12 ui-md-10 ui-fluid">
+
+      <div class="ui-g-12 ui-md-9 ui-fluid">
         <label for="">Logradouro</label>
-        <input type="text" pInputText>
+        <input type="text" pInputText name="place" ngModel #place="ngModel" required minlength="5">
+        <app-message [control]="place" error="required" text="Informe o Logradouro"></app-message>
+        <app-message [control]="place" error="minlength" text="informe no mínimo {{place.errors?.minlength?.requiredLength}} caracteres."></app-message>
       </div>
-      <div class="ui-g-12 ui-md-2 ui-fluid">
+
+      <div class="ui-g-12 ui-md-3 ui-fluid">
         <label for="">Numero</label>
-        <input type="text" pInputText>
+        <input type="text" pInputText name="number" ngModel #number="ngModel" required>
+        <app-message [control]="number" error="required" text="Informe o numero"></app-message>
+        <app-message [control]="number" error="minlength" text="informe no mínimo {{number.errors?.minlength?.requiredLength}} caracteres."></app-message>
       </div>
+
     </div>
     <div class="ui-g">
       <div class="ui-g-12 ui-md-5 ui-fluid">

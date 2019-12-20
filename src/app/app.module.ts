@@ -21,6 +21,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ListPeopleComponent } from './list-people/list-people.component';
 import { RegisterPostingComponent } from './register-posting/register-posting.component';
 import { RegisterPersonComponent } from './register-person/register-person.component';
+import { MessageComponent } from './message/message.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +30,8 @@ import { RegisterPersonComponent } from './register-person/register-person.compo
     ListPostingsComponent,
     ListPeopleComponent,
     RegisterPostingComponent,
-    RegisterPersonComponent
+    RegisterPersonComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
