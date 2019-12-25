@@ -9,8 +9,10 @@
       <div class="ui-g-12 ui-md-12 ui-fluid">
         <label for="">Nome</label>
         <input type="text" pInputText name="name" ngModel #name="ngModel" required minlength="3">
+        <!--
         <app-message [control]="name" error="required" text="Informe o Nome"></app-message>
         <app-message [control]="name" error="minlength" text="informe no mínimo {{name.errors?.minlength?.requiredLength}} caracteres."></app-message>
+        -->
       </div>
     </div>
     <div class="ui-g">
@@ -18,15 +20,19 @@
       <div class="ui-g-12 ui-md-9 ui-fluid">
         <label for="">Logradouro</label>
         <input type="text" pInputText name="place" ngModel #place="ngModel" required minlength="5">
-        <app-message [control]="place" error="required" text="Informe o Logradouro"></app-message>
-        <app-message [control]="place" error="minlength" text="informe no mínimo {{place.errors?.minlength?.requiredLength}} caracteres."></app-message>
+        <!--
+          <app-message [control]="place" error="required" text="Informe o Logradouro"></app-message>
+          <app-message [control]="place" error="minlength" text="informe no mínimo {{place.errors?.minlength?.requiredLength}} caracteres."></app-message>
+        -->
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label for="">Numero</label>
         <input type="text" pInputText name="number" ngModel #number="ngModel" required>
-        <app-message [control]="number" error="required" text="Informe o numero"></app-message>
-        <app-message [control]="number" error="minlength" text="informe no mínimo {{number.errors?.minlength?.requiredLength}} caracteres."></app-message>
+        <!--
+          <app-message [control]="number" error="required" text="Informe o numero"></app-message>
+          <app-message [control]="number" error="minlength" text="informe no mínimo {{number.errors?.minlength?.requiredLength}} caracteres."></app-message>
+        -->
       </div>
 
     </div>
@@ -38,26 +44,30 @@
       <div class="ui-g-12 ui-md-5 ui-fluid">
         <label for="">Bairro</label>
         <input type="text" pInputText name="neighborhood" ngModel #neighborhood="ngModel" required minlength="3">
-        <app-message [control]="neighborhood" error="required" text="Informe o Bairro"></app-message>
-        <app-message [control]="neighborhood" error="minlength" text="informe no mínimo {{neighborhood.errors?.minlength?.requiredLength}} caracteres."></app-message>
+        <!--
+          <app-message [control]="neighborhood" error="required" text="Informe o Bairro"></app-message>
+          <app-message [control]="neighborhood" error="minlength" text="informe no mínimo {{neighborhood.errors?.minlength?.requiredLength}} caracteres."></app-message>
+        -->
       </div>
       <div class="ui-g-12 ui-md-2 ui-fluid">
         <label for="">Cep</label>
         <p-inputMask mask="99.999-999" name="zipcode" ngModel #zipcode="ngModel" required></p-inputMask>
-        <app-message [control]="zipcode" error="required" text="Informe o CEP"></app-message>
-        <app-message [control]="zipcode" error="minlength" text="informe no mínimo {{zipcode.errors?.minlength?.requiredLength}} caracteres."></app-message>
+        <!--
+          <app-message [control]="zipcode" error="required" text="Informe o CEP"></app-message>
+          <app-message [control]="zipcode" error="minlength" text="informe no mínimo {{zipcode.errors?.minlength?.requiredLength}} caracteres."></app-message>
+        -->
       </div>
     </div>
     <div class="ui-g">
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label for="">Cidade</label>
         <input type="text" pInputText name="city" ngModel #city="ngModel" required>
-        <app-message [control]="city" error="required" text="Informe a cidade"></app-message>
+        <!--<app-message [control]="city" error="required" text="Informe a cidade"></app-message>-->
       </div>
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label for="">Estado</label>
         <input type="text" pInputText name="state" ngModel #state="ngModel" required>
-        <app-message [control]="state" error="required" text="Informe o estado"></app-message>
+        <!--<app-message [control]="state" error="required" text="Informe o estado"></app-message>-->
       </div>
     </div>
 

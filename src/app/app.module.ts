@@ -1,3 +1,4 @@
+import { PersonModule } from './person/person.module';
 import { PostingModule } from './posting/posting.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,35 +19,20 @@ import {TooltipModule} from 'primeng/tooltip';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { ListPeopleComponent } from './list-people/list-people.component';
-import { RegisterPersonComponent } from './register-person/register-person.component';
 import { MessageComponent } from './message/message.component';
-import { PeopleGridComponent } from './people-grid/people-grid.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    ListPeopleComponent,
-    RegisterPersonComponent,
     MessageComponent,
-    PeopleGridComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
-    InputTextModule,
-    InputTextareaModule,
-    InputMaskModule,
-    SelectButtonModule,
-    DropdownModule,
-    CalendarModule,
-    ButtonModule,
-    TableModule,
-    TooltipModule,
     //
-    PostingModule
+    PostingModule,
+    PersonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
