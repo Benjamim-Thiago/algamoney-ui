@@ -19,7 +19,7 @@
           yearRange="1920:2030"
           [showIcon]="true" name="expirationDate" ngModel #expiration="ngModel" required>
         </p-calendar>
-        <!--<app-message [control]="expiration" error="required" text="Informe o vencimento"></app-message>-->
+        <app-message [control]="expiration" error="required" text="Informe o vencimento"></app-message>
       </div>
       <div class="ui-g-6 ui-md-3 ui-fluid">
         <label for="">{{type.value == 'RECEITA' ? 'Recebimento' : 'Pagamento'}}</label>
@@ -37,10 +37,8 @@
       <div class="ui-g-12 ui-md-9 ui-fluid">
         <label for="">Descrição</label>
         <input type="text" pInputText name="description" ngModel #description="ngModel" required minlength="5">
-        <!--
           <app-message [control]="description" error="required" text="Informe a descrição"></app-message>
           <app-message [control]="description" error="minlength" text="informe no mínimo {{description.errors?.minlength?.requiredLength}} caracteres."></app-message>
-        -->
         </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">

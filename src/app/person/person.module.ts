@@ -6,12 +6,10 @@ import { FormsModule } from '@angular/forms';
 import { TooltipModule } from 'primeng/tooltip';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
-import { CalendarModule } from 'primeng/calendar';
-import { DropdownModule } from 'primeng/dropdown';
-import { SelectButtonModule } from 'primeng/selectbutton';
 import { InputMaskModule } from 'primeng/inputmask';
-import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
+
+import { SharedModule } from './../shared/shared.module';
 
 import { PeopleListComponent } from './people-list/people-list.component';
 import { PeopleGridComponent } from './people-grid/people-grid.component';
@@ -32,6 +30,8 @@ import { PeopleGridComponent } from './people-grid/people-grid.component';
     ButtonModule,
     TableModule,
     TooltipModule,
+
+    SharedModule
   ],
   exports: [
     PeopleListComponent,

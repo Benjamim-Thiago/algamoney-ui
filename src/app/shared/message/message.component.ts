@@ -20,7 +20,7 @@ export class MessageComponent implements OnInit {
   @Input() control: FormControl;
   @Input() text: string;
 
-  haveError():boolean {
+  haveError(): boolean {
     return this.control.hasError(this.error) && this.control.dirty;
   }
 
