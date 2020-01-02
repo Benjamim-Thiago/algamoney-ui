@@ -14,7 +14,6 @@ import { InputTextModule } from 'primeng/inputtext';
 
 import { SharedModule } from './../shared/shared.module';
 
-import { PostingsGridComponent } from './postings-grid/postings-grid.component';
 import { PostingsListComponent } from './postings-list/postings-list.component';
 import { PostingRegisterComponent } from './posting-register/posting-register.component';
 
@@ -23,8 +22,7 @@ import { PostingRegisterComponent } from './posting-register/posting-register.co
 @NgModule({
   declarations: [
     PostingRegisterComponent,
-    PostingsListComponent,
-    PostingsGridComponent
+    PostingsListComponent
   ],
   imports: [
     CommonModule,
