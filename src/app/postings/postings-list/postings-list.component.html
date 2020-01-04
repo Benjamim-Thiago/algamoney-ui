@@ -10,15 +10,37 @@
         <div class="ui-g-12 ui-fluid">
           <label for="">Descrição</label>
           <input pInputText type="text" style="width:94%"
-            name="description" [(ngModel)]="description">
+            name="description" [(ngModel)]="filter.description">
         </div>
 
         <div class="ui-g-12">
           <label for="" style="display: block;">Vencimento</label>
-          <input pInputText type="text" style="width: 95px;">
+          <p-calendar
+            [locale]="ptbr"
+            dateFormat="dd/mm/yy"
+            [readonlyInput]="true"
+            [yearNavigator]="true"
+            yearRange="1920:2030"
+            [showIcon]="true"
+            name="firstDate"
+            [(ngModel)]="filter.firstDate"
+            required
+            [inputStyle]="{width: '95px'}">
+          </p-calendar>
 
           <label for="">até</label>
-          <input pInputText type="text" style="width: 95px;">
+          <p-calendar
+            [locale]="ptbr"
+            dateFormat="dd/mm/yy"
+            [readonlyInput]="true"
+            [yearNavigator]="true"
+            yearRange="1920:2030"
+            [showIcon]="true"
+            name="lastDate"
+            [(ngModel)]="filter.lastDate"
+            required
+            [inputStyle]="{width: '95px'}">
+          </p-calendar>
         </div>
 
         <div class="ui-g-12">
@@ -29,7 +51,14 @@
 
     <div class="ui-g">
       <div class="ui-g-12">
-        <p-table [value]="postings" [responsive]="true" [paginator]=true rows="3">
+        <p-table [value]="postings"
+          [responsive]="true"
+          [paginator]=true
+          [rows]="filter.itemsPerPage"
+          [lazy]="true"
+          [totalRecords]="totalRegister"
+          (onLazyLoad)="changingPage($event)">
+
           <ng-template pTemplate="header">
             <tr>
                 <th>Pessoa</th>
@@ -67,6 +96,14 @@
                 <span class="ui-column-title">Ações</span>
                 <a pButton icon="pi pi-pencil" class="ui-button-warning" pTooltip="Editar" tooltipPosition="top"></a>&nbsp;
                 <button pButton icon="pi pi-trash" class="ui-button-danger" pTooltip="Excluir" tooltipPosition="top"></button>
+              </td>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="6">
+                Nenhum lançamento encontrado
               </td>
             </tr>
           </ng-template>
