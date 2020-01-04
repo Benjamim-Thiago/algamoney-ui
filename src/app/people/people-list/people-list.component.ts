@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PersonService, PersonFilter } from '../person.service';
+import { LazyLoadEvent } from 'primeng/api/public_api';
 
 @Component({
   selector: 'app-people-list',
@@ -6,18 +8,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./people-list.component.css']
 })
 export class PeopleListComponent implements OnInit {
+  filter = new PersonFilter();
+  people = [];
+  totalRegister = 0;
 
-  constructor() { }
+  constructor(private personService: PersonService) { }
 
-  people = [
-    { name: 'Benjamim Thiago', city: 'Teresina', state: 'Piauí', status: true },
-    { name: 'Crispilino', city: 'Timon', state: 'Maranhão', status: false },
-    { name: 'José Arlequin', city: null, state: '20/07/2017', status: false },
-    { name: 'Amanda Nunes', city: null, state: null, status: true },
-    { name: 'Sheldon Couper', city: 'Picos', state: 'Piauí', status: true },
-  ];
 
   ngOnInit() {
+
+  }
+
+  listAll() {
+    this.personService.listAll()
+    .then(result => {
+      this.people = result;
+    });
+  }
+
+  search(page = 0) {
+    this.filter.page = page;
+    this.personService.search(this.filter)
+    .then(result => {
+      this.totalRegister = result.total;
+      this.people = result.people;
+    });
+  }
+
+  changingPage(event: LazyLoadEvent) {
+    const page = event.first / event.rows;
+    this.search(page);
   }
 
 }

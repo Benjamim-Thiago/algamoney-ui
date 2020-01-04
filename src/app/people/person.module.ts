@@ -12,14 +12,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SharedModule } from './../shared/shared.module';
 
 import { PeopleListComponent } from './people-list/people-list.component';
-import { PeopleGridComponent } from './people-grid/people-grid.component';
-
-
 
 @NgModule({
   declarations: [
     PeopleListComponent,
-    PeopleGridComponent,
     PersonRegisterComponent
   ],
   imports: [

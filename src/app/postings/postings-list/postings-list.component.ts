@@ -37,7 +37,7 @@ export class PostingsListComponent implements OnInit {
 
   constructor(private postingService: PostingService) {}
 
-  list(page = 0) {
+  search(page = 0) {
     this.filter.page = page;
     this.postingService.search(this.filter)
     .then(result => {
@@ -48,7 +48,7 @@ export class PostingsListComponent implements OnInit {
 
   changingPage(event: LazyLoadEvent) {
     const page = event.first / event.rows;
-    this.list(page);
+    this.search(page);
   }
 
 }
