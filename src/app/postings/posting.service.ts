@@ -49,6 +49,14 @@ export class PostingService {
         }
 
         return result;
-      });
+    });
+  }
+
+  remove(id: number): Promise<void> {
+    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    return this.http.delete(`${this.postingUrl}/${id}`, {headers})
+      .toPromise()
+      .then(() => null);
   }
 }

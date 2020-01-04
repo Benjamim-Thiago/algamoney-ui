@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { LazyLoadEvent } from 'primeng/api/public_api';
 
 import { PostingService, PostingFilter } from '../posting.service';
+import { Table } from 'primeng/table/table';
 
 @Component({
   selector: 'app-postings-list',
@@ -11,6 +12,7 @@ import { PostingService, PostingFilter } from '../posting.service';
 })
 export class PostingsListComponent implements OnInit {
   ptbr: any;
+  @ViewChild('table', {static: true}) grid: Table;
 
   totalRegister = 0;
   filter = new PostingFilter();
@@ -49,6 +51,13 @@ export class PostingsListComponent implements OnInit {
   changingPage(event: LazyLoadEvent) {
     const page = event.first / event.rows;
     this.search(page);
+  }
+
+  remove(posting: any) {
+    this.postingService.remove(posting.id)
+      .then(() => {
+        this.grid.reset();
+      });
   }
 
 }

@@ -57,7 +57,8 @@
           [rows]="filter.itemsPerPage"
           [lazy]="true"
           [totalRecords]="totalRegister"
-          (onLazyLoad)="changingPage($event)">
+          (onLazyLoad)="changingPage($event)"
+          #table>
 
           <ng-template pTemplate="header">
             <tr>
@@ -95,7 +96,8 @@
               <td class="col-acoes">
                 <span class="ui-column-title">Ações</span>
                 <a pButton icon="pi pi-pencil" class="ui-button-warning" pTooltip="Editar" tooltipPosition="top"></a>&nbsp;
-                <button pButton icon="pi pi-trash" class="ui-button-danger" pTooltip="Excluir" tooltipPosition="top"></button>
+                <button pButton icon="pi pi-trash" class="ui-button-danger"
+                  pTooltip="Excluir" tooltipPosition="top" (click)="remove(posting)"></button>
               </td>
             </tr>
           </ng-template>
