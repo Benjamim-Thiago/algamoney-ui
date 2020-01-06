@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CalendarTranslateService } from 'src/app/calendar-translate.service';
 
 @Component({
   selector: 'app-posting-register',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./posting-register.component.css']
 })
 export class PostingRegisterComponent implements OnInit {
+  private calendarTranslate = new CalendarTranslateService();
   ptbr: any;
+
   types = [
     {label: 'Receita', value: 'RECEITA'},
     {label: 'Despesa', value: 'DESPESA'}
@@ -35,20 +38,7 @@ export class PostingRegisterComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.ptbr = {
-      firstDayOfWeek: 0,
-      dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-      dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
-      dayNamesMin: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
-      monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho',
-       'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-
-      monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      today: 'Today',
-      clear: 'Clear',
-      dateFormat: 'mm/dd/yy',
-      weekHeader: 'Wk'
-    };
+    this.ptbr = this.calendarTranslate.translate();
   }
 
 }
