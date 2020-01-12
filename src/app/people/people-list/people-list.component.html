@@ -63,7 +63,8 @@
             <td class="col-acoes">
               <span class="ui-column-title">Ações</span>
               <a pButton icon="pi pi-pencil" class="ui-button-warning" pTooltip="Editar" tooltipPosition="top"></a>&nbsp;
-              <button pButton icon="pi pi-trash" class="ui-button-danger" pTooltip="Excluir" tooltipPosition="top"></button>
+              <button pButton icon="pi pi-trash" class="ui-button-danger"
+                pTooltip="Excluir" tooltipPosition="top" (click)="confirmRemove(person)"></button>
             </td>
           </tr>
         </ng-template>

@@ -1,12 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { LazyLoadEvent} from 'primeng/api/public_api';
 import {ConfirmationService} from 'primeng/api';
+import { LazyLoadEvent} from 'primeng/api/public_api';
+import { Table } from 'primeng/table/table';
+
+import { ToastyService } from 'ng2-toasty';
 
 import { PostingService, PostingFilter } from '../posting.service';
-import { Table } from 'primeng/table/table';
-import { ToastyService } from 'ng2-toasty';
 import { CalendarTranslateService } from 'src/app/calendar-translate.service';
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 
 @Component({
   selector: 'app-postings-list',
@@ -29,6 +31,7 @@ export class PostingsListComponent implements OnInit {
 
   constructor(
     private postingService: PostingService,
+    private errorHandlerService: ErrorHandlerService,
     private toastyService: ToastyService,
     private confirmationService: ConfirmationService) {}
 
@@ -38,7 +41,7 @@ export class PostingsListComponent implements OnInit {
     .then(result => {
       this.totalRegister = result.total;
       this.postings = result.postings;
-    });
+    }).catch(error => this.errorHandlerService.handle(error));
   }
 
   changingPage(event: LazyLoadEvent) {
@@ -61,7 +64,7 @@ export class PostingsListComponent implements OnInit {
       .then(() => {
         this.grid.reset();
         this.toastyService.success('Lançamento excluído com sucesso!');
-      });
+      }).catch(error => this.errorHandlerService.handle(error));
   }
 
 }

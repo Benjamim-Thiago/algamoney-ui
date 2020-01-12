@@ -1,6 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
 import { PersonService, PersonFilter } from '../person.service';
+import {ConfirmationService} from 'primeng/api';
 import { LazyLoadEvent } from 'primeng/api/public_api';
+
+import { ToastyService } from 'ng2-toasty';
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+import { Table } from 'primeng/table/table';
 
 @Component({
   selector: 'app-people-list',
@@ -8,11 +14,17 @@ import { LazyLoadEvent } from 'primeng/api/public_api';
   styleUrls: ['./people-list.component.css']
 })
 export class PeopleListComponent implements OnInit {
+  @ViewChild('table', {static: true}) grid: Table;
+
   filter = new PersonFilter();
   people = [];
   totalRegister = 0;
 
-  constructor(private personService: PersonService) { }
+  constructor(
+    private personService: PersonService,
+    private errorHandlerService: ErrorHandlerService,
+    private toastyService: ToastyService,
+    private confirmationService: ConfirmationService) { }
 
 
   ngOnInit() {
@@ -38,6 +50,24 @@ export class PeopleListComponent implements OnInit {
   changingPage(event: LazyLoadEvent) {
     const page = event.first / event.rows;
     this.search(page);
+  }
+
+  confirmRemove(person: any) {
+    this.confirmationService.confirm({
+      message: `Tem certeza que deseja
+        excluir o lancamento <strong>${person.name}</strong>?`,
+      accept: () => {
+        this.remove(person);
+      }
+    });
+  }
+
+  remove(person: any) {
+    this.personService.remove(person.id)
+      .then(() => {
+        this.grid.reset();
+        this.toastyService.success('Pessoa excluída com sucesso!');
+      }).catch(error => this.errorHandlerService.handle(error));
   }
 
 }
