@@ -70,4 +70,18 @@ export class PeopleListComponent implements OnInit {
       }).catch(error => this.errorHandlerService.handle(error));
   }
 
+  alterStatus(person: any): void {
+    const newStatus = !person.status;
+    console.log(person.status);
+    this.personService.modifyStatus(person.id, newStatus)
+      .then(() => {
+        const action = newStatus ? 'ativada' : 'desativada';
+
+        person.status = newStatus;
+        this.toastyService.success(`Pessoa ${action} com sucesso!`);
+      })
+      .catch(erro => this.errorHandlerService.handle(erro));
+  }
+
+
 }

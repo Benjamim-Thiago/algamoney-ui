@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { observable } from 'rxjs';
 
 export class PersonFilter {
   name: string;
@@ -56,6 +57,14 @@ export class PersonService {
     const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
     return this.http.delete(`${this.personUrl}/${id}`, {headers})
+      .toPromise()
+      .then(() => null);
+  }
+
+  modifyStatus(id: number, status: boolean): Promise<void> {
+    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    return this.http.put(`${this.personUrl}/${id}/status`,{status: status}, {headers})
       .toPromise()
       .then(() => null);
   }

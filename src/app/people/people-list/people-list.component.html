@@ -55,7 +55,7 @@
             <td>
               <span class="ui-column-title">Status</span>
               <a href="javascript:;" [pTooltip]="person.status ? 'Desativar' : 'Ativar'"
-                  tooltipPosition="top">
+                  tooltipPosition="top" (click)="alterStatus(person)">
                 {{person.status ? 'Ativo' : 'Inativo'}}
               </a>
             </td>
