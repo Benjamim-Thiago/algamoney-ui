@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 import * as moment from 'moment';
+import { Posting } from '../models/posting';
 
 export class PostingFilter {
   description: string;
@@ -50,6 +51,16 @@ export class PostingService {
 
         return result;
     });
+  }
+
+  save(posting: Posting): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+      .append('Content-Type', 'application/json');
+
+    return this.http.post<Posting>(
+      this.postingUrl, posting, {headers})
+  .toPromise();
   }
 
   remove(id: number): Promise<void> {

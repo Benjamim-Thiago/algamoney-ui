@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { observable } from 'rxjs';
+import { Person } from '../models/person';
 
 export class PersonFilter {
   name: string;
@@ -51,6 +52,16 @@ export class PersonService {
         }
         return result;
       });
+  }
+
+  save(person: Person): Promise<any> {
+    const headers = new HttpHeaders()
+      .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+      .append('Content-Type', 'application/json');
+
+    return this.http.post<Person>(
+      this.personUrl, person, {headers})
+    .toPromise();
   }
 
   remove(id: number): Promise<void> {

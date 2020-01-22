@@ -27,7 +27,8 @@
       [rows]="filter.itemsPerPage"
       [lazy]="true"
       [totalRecords]="totalRegister"
-      (onLazyLoad)="changingPage($event)">
+      (onLazyLoad)="changingPage($event)"
+      #table>
 
         <ng-template pTemplate="header">
           <tr>

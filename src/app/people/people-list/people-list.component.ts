@@ -31,13 +31,6 @@ export class PeopleListComponent implements OnInit {
 
   }
 
-  listAll() {
-    this.personService.listAll()
-    .then(result => {
-      this.people = result;
-    });
-  }
-
   search(page = 0) {
     this.filter.page = page;
     this.personService.search(this.filter)
@@ -72,7 +65,7 @@ export class PeopleListComponent implements OnInit {
 
   alterStatus(person: any): void {
     const newStatus = !person.status;
-    console.log(person.status);
+    //console.log(person.status);
     this.personService.modifyStatus(person.id, newStatus)
       .then(() => {
         const action = newStatus ? 'ativada' : 'desativada';
