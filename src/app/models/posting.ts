@@ -7,6 +7,8 @@ export class Posting {
   type = 'RECEITA';
   value: number;
   expirationDate: Date;
+  paymentDate: Date;
+  comments: string;
   category = new Category();
   person = new Person();
 }

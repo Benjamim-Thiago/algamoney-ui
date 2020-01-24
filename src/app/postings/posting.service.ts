@@ -60,7 +60,7 @@ export class PostingService {
 
     return this.http.post<Posting>(
       this.postingUrl, posting, {headers})
-  .toPromise();
+    .toPromise();
   }
 
   remove(id: number): Promise<void> {
@@ -69,5 +69,48 @@ export class PostingService {
     return this.http.delete(`${this.postingUrl}/${id}`, {headers})
       .toPromise()
       .then(() => null);
+  }
+
+  update(posting: Posting): Promise<Posting> {
+    const headers = new HttpHeaders()
+    .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+    .append('Content-Type', 'application/json');
+
+    return this.http.put<Posting>(`${this.postingUrl}/${posting.id}`, posting, {headers})
+        .toPromise()
+        .then(response => {
+          const postingUpdated = response as Posting;
+
+          this.convertStringsForDates([postingUpdated]);
+
+          return postingUpdated;
+        });
+  }
+
+  findById(id: number): Promise<Posting> {
+    const headers = new HttpHeaders()
+    .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    return this.http.get(`${this.postingUrl}/${id}`, {headers})
+      .toPromise()
+      .then(response => {
+        const posting = response as Posting;
+
+        this.convertStringsForDates([posting]);
+
+        return posting;
+      });
+  }
+
+  private convertStringsForDates(postings: Posting[]) {
+    for (const posting of postings) {
+      posting.expirationDate = moment(posting.expirationDate,
+        'YYYY-MM-DD').toDate();
+
+      if (posting.paymentDate) {
+        posting.paymentDate = moment(posting.paymentDate,
+          'YYYY-MM-DD').toDate();
+      }
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { CalendarTranslateService } from 'src/app/calendar-translate.service';
 import { CategoryService } from 'src/app/categories/category.service';
@@ -37,24 +37,67 @@ export class PostingRegisterComponent implements OnInit {
     private postingService: PostingService,
     private toastyService: ToastyService,
     private errorHandlerService: ErrorHandlerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    console.log(this.route.snapshot.params['id']);
+    const postingCode = this.route.snapshot.params['id'];
+
+    if (postingCode) {
+      this.loadPosting(postingCode);
+    }
+
     this.ptbr = this.calendarTranslate.translate();
     this.loadCategories();
     this.loadPeople();
   }
 
+  get editing() {
+    return Boolean(this.posting.id);
+  }
+
+  new(form: FormControl) {
+    form.reset();
+    setTimeout(function() {
+      this.posting = new Posting();
+    }.bind(this), 1);
+
+    this.router.navigate(['/postings/new']);
+  }
+
+  loadPosting(id: number) {
+    this.postingService.findById(id)
+    .then(posting => {
+      this.posting = posting;
+    }).catch(error => this.errorHandlerService.handle(error));
+  }
+
   save(form: FormControl) {
+    if (this.editing) {
+      this.editPosting(form);
+    } else {
+      this.addPosting(form);
+    }
+  }
+
+  addPosting(form: FormControl) {
     this.postingService.save(this.posting)
-      .then(() => {
-        this.toastyService.success('Lançamento cadstrado com sucesso.');
+      .then(postingInsert => {
+        this.toastyService.success('Lançamento cadastrado com sucesso.');
+        //form.reset();
+        //this.posting = new Posting();
+        this.router.navigate(['/postings', postingInsert.id]);
 
-        form.reset();
-        this.posting = new Posting();
+      }).catch(error => this.errorHandlerService.handle(error));
+  }
 
+  editPosting(form: FormControl) {
+    this.postingService.update(this.posting)
+      .then(posting => {
+        this.posting = posting;
+
+        this.toastyService.success('Lançamento alterado com sucesso.');
       }).catch(error => this.errorHandlerService.handle(error));
   }
 
