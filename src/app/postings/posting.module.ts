@@ -16,6 +16,7 @@ import { SharedModule } from './../shared/shared.module';
 
 import { PostingsListComponent } from './postings-list/postings-list.component';
 import { PostingRegisterComponent } from './posting-register/posting-register.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -26,6 +27,7 @@ import { PostingRegisterComponent } from './posting-register/posting-register.co
   ],
   imports: [
     CommonModule,
+    RouterModule,
     FormsModule,
     InputTextModule,
     InputTextareaModule,

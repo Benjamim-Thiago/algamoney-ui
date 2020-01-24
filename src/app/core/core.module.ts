@@ -9,6 +9,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ErrorHandlerService } from './error-handler.service';
 import { PersonService } from '../people/person.service';
 import { PostingService } from '../postings/posting.service';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { PostingService } from '../postings/posting.service';
   ],
   imports: [
     CommonModule,
+    RouterModule,
 
     ConfirmDialogModule,
     ToastyModule.forRoot(),

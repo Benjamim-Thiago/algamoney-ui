@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { CalendarTranslateService } from 'src/app/calendar-translate.service';
 import { CategoryService } from 'src/app/categories/category.service';
@@ -35,10 +36,12 @@ export class PostingRegisterComponent implements OnInit {
     private personService: PersonService,
     private postingService: PostingService,
     private toastyService: ToastyService,
-    private errorHandlerService: ErrorHandlerService
+    private errorHandlerService: ErrorHandlerService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
+    console.log(this.route.snapshot.params['id']);
     this.ptbr = this.calendarTranslate.translate();
     this.loadCategories();
     this.loadPeople();

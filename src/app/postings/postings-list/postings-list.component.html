@@ -2,7 +2,7 @@
     <div class="ui-g">
       <div class="ui-g-12">
         <h1>Lançamentos</h1>
-        <button pButton type="button" icon="pi pi-file-o" label="Novo Lançamento"></button>
+        <button routerLink="/postings/new" pButton type="button" icon="pi pi-file-o" label="Novo Lançamento"></button>
       </div>
     </div>
     <div class="ui-g">
@@ -95,7 +95,7 @@
                 {{posting.value | number: '1.2-2'}}</td>
               <td class="col-acoes">
                 <span class="ui-column-title">Ações</span>
-                <a pButton icon="pi pi-pencil" class="ui-button-warning" pTooltip="Editar" tooltipPosition="top"></a>&nbsp;
+                <a pButton [routerLink]="['/postings', posting.id]" icon="pi pi-pencil" class="ui-button-warning" pTooltip="Editar" tooltipPosition="top"></a>&nbsp;
                 <button pButton icon="pi pi-trash" class="ui-button-danger"
                   pTooltip="Excluir" tooltipPosition="top" (click)="confirmRemove(posting)"></button>
               </td>
