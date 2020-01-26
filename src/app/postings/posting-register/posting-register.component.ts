@@ -11,6 +11,7 @@ import { PostingService } from '../posting.service';
 import { ToastyService } from 'ng2-toasty';
 
 import {Posting} from 'src/app/models/posting';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-posting-register',
@@ -38,12 +39,13 @@ export class PostingRegisterComponent implements OnInit {
     private toastyService: ToastyService,
     private errorHandlerService: ErrorHandlerService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) { }
 
   ngOnInit() {
     const postingCode = this.route.snapshot.params['id'];
-
+    this.title.setTitle('Novo lançamento');
     if (postingCode) {
       this.loadPosting(postingCode);
     }
@@ -70,12 +72,13 @@ export class PostingRegisterComponent implements OnInit {
     this.postingService.findById(id)
     .then(posting => {
       this.posting = posting;
+      this.editTitlePageModeEditing();
     }).catch(error => this.errorHandlerService.handle(error));
   }
 
   save(form: FormControl) {
     if (this.editing) {
-      this.editPosting(form);
+      this.alterPosting(form);
     } else {
       this.addPosting(form);
     }
@@ -92,12 +95,13 @@ export class PostingRegisterComponent implements OnInit {
       }).catch(error => this.errorHandlerService.handle(error));
   }
 
-  editPosting(form: FormControl) {
+  alterPosting(form: FormControl) {
     this.postingService.update(this.posting)
       .then(posting => {
         this.posting = posting;
 
         this.toastyService.success('Lançamento alterado com sucesso.');
+        this.editTitlePageModeEditing();
       }).catch(error => this.errorHandlerService.handle(error));
   }
 
@@ -113,5 +117,9 @@ export class PostingRegisterComponent implements OnInit {
     .then(people => {
       this.people = people.map(p => ({label: p.name, value: p.id}));
     });
+  }
+
+  editTitlePageModeEditing() {
+    this.title.setTitle(`Edição de lançamento: ${this.posting.description}`);
   }
 }

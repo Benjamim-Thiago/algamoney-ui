@@ -9,20 +9,11 @@ import localePt from '@angular/common/locales/pt';
 import { CoreModule } from './core/core.module';
 import { PersonModule } from './people/person.module';
 import { PostingModule } from './postings/posting.module';
+import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { PostingsListComponent } from './postings/postings-list/postings-list.component';
-import { PostingRegisterComponent } from './postings/posting-register/posting-register.component';
-import { PeopleListComponent } from './people/people-list/people-list.component';
 
 registerLocaleData(localePt);
-
-const routes: Routes = [
-  { path: 'postings', component: PostingsListComponent },
-  { path: 'postings/new', component: PostingRegisterComponent },
-  { path: 'postings/:id', component: PostingRegisterComponent },
-  { path: 'people', component: PeopleListComponent }
-];
 
 @NgModule({
   declarations: [
@@ -32,11 +23,11 @@ const routes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes),
     //
     CoreModule,
     PostingModule,
-    PersonModule
+    PersonModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

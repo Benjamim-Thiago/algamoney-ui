@@ -9,6 +9,7 @@ import { ToastyService } from 'ng2-toasty';
 import { PostingService, PostingFilter } from '../posting.service';
 import { CalendarTranslateService } from 'src/app/calendar-translate.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-postings-list',
@@ -27,13 +28,15 @@ export class PostingsListComponent implements OnInit {
 
   ngOnInit() {
     this.ptbr = this.calendarTranslate.translate();
+    this.title.setTitle('listagem de lançamentos');
   }
 
   constructor(
     private postingService: PostingService,
     private errorHandlerService: ErrorHandlerService,
     private toastyService: ToastyService,
-    private confirmationService: ConfirmationService) {}
+    private confirmationService: ConfirmationService,
+    private title: Title) {}
 
   search(page = 0) {
     this.filter.page = page;

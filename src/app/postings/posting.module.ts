@@ -12,12 +12,11 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 
+import { PostingRoutingModule } from './posting-routing.module';
 import { SharedModule } from './../shared/shared.module';
 
 import { PostingsListComponent } from './postings-list/postings-list.component';
 import { PostingRegisterComponent } from './posting-register/posting-register.component';
-import { RouterModule } from '@angular/router';
-
 
 
 @NgModule({
@@ -27,7 +26,6 @@ import { RouterModule } from '@angular/router';
   ],
   imports: [
     CommonModule,
-    RouterModule,
     FormsModule,
     InputTextModule,
     InputTextareaModule,
@@ -39,11 +37,9 @@ import { RouterModule } from '@angular/router';
     TooltipModule,
     CurrencyMaskModule,
 
-    SharedModule
+    SharedModule,
+    PostingRoutingModule
   ],
-  exports: [
-    PostingsListComponent,
-    PostingRegisterComponent
-  ]
+  exports: []
 })
 export class PostingModule { }

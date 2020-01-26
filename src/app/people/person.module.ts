@@ -12,6 +12,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { SharedModule } from './../shared/shared.module';
 
 import { PeopleListComponent } from './people-list/people-list.component';
+import { PeopleRoutingModule } from './people.routing.module';
 
 @NgModule({
   declarations: [
@@ -27,11 +28,9 @@ import { PeopleListComponent } from './people-list/people-list.component';
     TableModule,
     TooltipModule,
 
-    SharedModule
+    SharedModule,
+    PeopleRoutingModule
   ],
-  exports: [
-    PeopleListComponent,
-    PersonRegisterComponent
-  ]
+  exports: []
 })
 export class PersonModule { }
