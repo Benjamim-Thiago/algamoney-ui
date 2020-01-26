@@ -79,4 +79,30 @@ export class PersonService {
       .toPromise()
       .then(() => null);
   }
+
+  update(person: Person): Promise<Person> {
+    const headers = new HttpHeaders()
+    .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+    .append('Content-Type', 'application/json');
+
+    return this.http.put<Person>(`${this.personUrl}/${person.id}`, person, {headers})
+        .toPromise()
+        .then(response => {
+          const personUpdated = response as Person;
+
+          return personUpdated;
+        });
+  }
+
+  findById(id: number): Promise<Person> {
+    const headers = new HttpHeaders()
+    .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+    return this.http.get(`${this.personUrl}/${id}`, {headers})
+      .toPromise()
+      .then(response => {
+        const person = response as Person;
+        return person;
+      });
+  }
 }

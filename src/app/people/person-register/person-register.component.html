@@ -17,16 +17,12 @@
 
       <div class="ui-g-12 ui-md-9 ui-fluid">
         <label for="">Logradouro</label>
-        <input type="text" pInputText name="place" [(ngModel)]="person.address.place" ngModel #place="ngModel" required minlength="5">
-          <app-message [control]="place" error="required" text="Informe o Logradouro"></app-message>
-          <app-message [control]="place" error="minlength" text="informe no mínimo {{place.errors?.minlength?.requiredLength}} caracteres."></app-message>
+        <input type="text" pInputText name="place" [(ngModel)]="person.address.place" ngModel #place="ngModel" minlength="5">
       </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label for="">Numero</label>
-        <input type="text" pInputText name="number" [(ngModel)]="person.address.number" ngModel #number="ngModel" required>
-          <app-message [control]="number" error="required" text="Informe o numero"></app-message>
-          <app-message [control]="number" error="minlength" text="informe no mínimo {{number.errors?.minlength?.requiredLength}} caracteres."></app-message>
+        <input type="text" pInputText name="number" [(ngModel)]="person.address.number" ngModel #number="ngModel">
       </div>
 
     </div>
@@ -37,27 +33,22 @@
       </div>
       <div class="ui-g-12 ui-md-5 ui-fluid">
         <label for="">Bairro</label>
-        <input type="text" pInputText name="neighborhood" [(ngModel)]="person.address.neighborhood" ngModel #neighborhood="ngModel" required minlength="3">
-          <app-message [control]="neighborhood" error="required" text="Informe o Bairro"></app-message>
-          <app-message [control]="neighborhood" error="minlength" text="informe no mínimo {{neighborhood.errors?.minlength?.requiredLength}} caracteres."></app-message>
+        <input type="text" pInputText name="neighborhood" [(ngModel)]="person.address.neighborhood" ngModel #neighborhood="ngModel" minlength="3">
       </div>
+
       <div class="ui-g-12 ui-md-2 ui-fluid">
         <label for="">Cep</label>
-        <p-inputMask mask="99.999-999" name="zipcode" [(ngModel)]="person.address.zipcode" ngModel #zipcode="ngModel" required></p-inputMask>
-          <app-message [control]="zipcode" error="required" text="Informe o CEP"></app-message>
-          <app-message [control]="zipcode" error="minlength" text="informe no mínimo {{zipcode.errors?.minlength?.requiredLength}} caracteres."></app-message>
+        <p-inputMask mask="99.999-999" name="zipcode" [(ngModel)]="person.address.zipcode" ngModel #zipcode="ngModel"></p-inputMask>
       </div>
     </div>
     <div class="ui-g">
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label for="">Cidade</label>
-        <input type="text" pInputText name="city" [(ngModel)]="person.address.city" ngModel #city="ngModel" required>
-        <app-message [control]="city" error="required" text="Informe a cidade"></app-message>
+        <input type="text" pInputText name="city" [(ngModel)]="person.address.city" ngModel #city="ngModel">
       </div>
       <div class="ui-g-12 ui-md-6 ui-fluid">
         <label for="">Estado</label>
-        <input type="text" pInputText name="state" [(ngModel)]="person.address.state" ngModel #state="ngModel" required>
-        <app-message [control]="state" error="required" text="Informe o estado"></app-message>
+        <input type="text" pInputText name="state" [(ngModel)]="person.address.state" ngModel #state="ngModel">
       </div>
     </div>
 
@@ -65,9 +56,9 @@
       <div class="ui-g-12">
         <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="f.invalid"></button>
         &nbsp;
-        <button pButton type="button" label="Novo" class="ui-button-info"></button>
+        <button (click)="new(f)" pButton type="button" label="Novo" class="ui-button-info"></button>
         &nbsp;
-        <a href="#">Voltar para listagem</a>
+        <a routerLink="/people">Voltar para listagem</a>
       </div>
     </div>
   </form>

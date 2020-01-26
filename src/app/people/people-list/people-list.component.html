@@ -3,7 +3,7 @@
     <div class="ui-g">
       <div class="ui-g-12">
         <h1>Pessoas</h1>
-        <button pButton type="button" icon="pi pi-file-o" label="Nova Pessoa"></button>
+        <button routerLink="/people/new" pButton type="button" icon="pi pi-file-o" label="Nova Pessoa"></button>
       </div>
     </div>
 
@@ -63,7 +63,7 @@
 
             <td class="col-acoes">
               <span class="ui-column-title">Ações</span>
-              <a pButton icon="pi pi-pencil" class="ui-button-warning" pTooltip="Editar" tooltipPosition="top"></a>&nbsp;
+              <a pButton [routerLink]="['/people', person.id]" icon="pi pi-pencil" class="ui-button-warning" pTooltip="Editar" tooltipPosition="top"></a>&nbsp;
               <button pButton icon="pi pi-trash" class="ui-button-danger"
                 pTooltip="Excluir" tooltipPosition="top" (click)="confirmRemove(person)"></button>
             </td>
