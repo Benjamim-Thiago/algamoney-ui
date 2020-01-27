@@ -12,6 +12,7 @@ import { PostingModule } from './postings/posting.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import { SecurityModule } from './security/security.module';
 
 registerLocaleData(localePt);
 
@@ -27,6 +28,7 @@ registerLocaleData(localePt);
     CoreModule,
     PostingModule,
     PersonModule,
+    SecurityModule,
     AppRoutingModule
   ],
   providers: [],
