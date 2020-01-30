@@ -1,5 +1,6 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 import {ToastyModule} from 'ng2-toasty';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
@@ -11,7 +12,7 @@ import { PersonService } from '../people/person.service';
 import { PostingService } from '../postings/posting.service';
 import { RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found.component';
-import { Title } from '@angular/platform-browser';
+import { AuthService } from '../security/auth.service';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { Title } from '@angular/platform-browser';
     PostingService,
     PersonService,
     ErrorHandlerService,
+    AuthService,
 
     Title,
     {provide: LOCALE_ID, useValue: 'pt-BR'},
