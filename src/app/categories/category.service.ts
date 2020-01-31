@@ -10,9 +10,9 @@ export class CategoryService {
   constructor(private http: HttpClient) { }
 
   listAll(): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    // const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-    return this.http.get(this.categoryUrl, { headers })
+    return this.http.get(this.categoryUrl)
       .toPromise()
       .then(response => {
         return response;

@@ -21,8 +21,6 @@ export class PostingService {
   constructor(private http: HttpClient) { }
 
   search(filter: PostingFilter): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-
     let params = new HttpParams();
 
     params = params.set('page', filter.page.toString());
@@ -40,7 +38,7 @@ export class PostingService {
       params = params.set('lastDate', moment(filter.lastDate).format('YYYY-MM-DD'));
     }
 
-    return this.http.get(`${this.postingUrl}?summary`, { headers, params })
+    return this.http.get(`${this.postingUrl}?summary`, { params })
       .toPromise()
       .then(response => {
         const postings = response['content']
@@ -54,29 +52,23 @@ export class PostingService {
   }
 
   save(posting: Posting): Promise<any> {
-    const headers = new HttpHeaders()
-      .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
-      .append('Content-Type', 'application/json');
-
-    return this.http.post<Posting>(
-      this.postingUrl, posting, {headers})
+   return this.http.post<Posting>(
+      this.postingUrl, posting)
     .toPromise();
   }
 
   remove(id: number): Promise<void> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
-
-    return this.http.delete(`${this.postingUrl}/${id}`, {headers})
+   return this.http.delete(`${this.postingUrl}/${id}`)
       .toPromise()
       .then(() => null);
   }
 
   update(posting: Posting): Promise<Posting> {
-    const headers = new HttpHeaders()
-    .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
-    .append('Content-Type', 'application/json');
+    // const headers = new HttpHeaders()
+    // .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+    // .append('Content-Type', 'application/json');
 
-    return this.http.put<Posting>(`${this.postingUrl}/${posting.id}`, posting, {headers})
+    return this.http.put<Posting>(`${this.postingUrl}/${posting.id}`, posting)
         .toPromise()
         .then(response => {
           const postingUpdated = response as Posting;
@@ -88,10 +80,10 @@ export class PostingService {
   }
 
   findById(id: number): Promise<Posting> {
-    const headers = new HttpHeaders()
-    .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    // const headers = new HttpHeaders()
+    // .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-    return this.http.get(`${this.postingUrl}/${id}`, {headers})
+    return this.http.get(`${this.postingUrl}/${id}`)
       .toPromise()
       .then(response => {
         const posting = response as Posting;

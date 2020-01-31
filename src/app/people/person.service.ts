@@ -20,9 +20,9 @@ export class PersonService {
   constructor(private http: HttpClient) { }
 
   listAll(): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    // const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-    return this.http.get(this.personUrl, { headers })
+    return this.http.get(this.personUrl)
       .toPromise()
       .then(response => {
         return response['content'];
@@ -30,7 +30,7 @@ export class PersonService {
   }
 
   search(filter: PersonFilter): Promise<any> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    // const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
     let params = new HttpParams();
 
@@ -42,7 +42,7 @@ export class PersonService {
     }
 
 
-    return this.http.get(this.personUrl, { headers, params })
+    return this.http.get(this.personUrl, { params })
       .toPromise()
       .then(response => {
         const people = response['content']
@@ -55,37 +55,37 @@ export class PersonService {
   }
 
   save(person: Person): Promise<any> {
-    const headers = new HttpHeaders()
-      .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
-      .append('Content-Type', 'application/json');
+    //  const headers = new HttpHeaders()
+    //  .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+    //  .append('Content-Type', 'application/json');
 
     return this.http.post<Person>(
-      this.personUrl, person, {headers})
+      this.personUrl, person)
     .toPromise();
   }
 
   remove(id: number): Promise<void> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    // const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-    return this.http.delete(`${this.personUrl}/${id}`, {headers})
+    return this.http.delete(`${this.personUrl}/${id}`)
       .toPromise()
       .then(() => null);
   }
 
   modifyStatus(id: number, status: boolean): Promise<void> {
-    const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+   // const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-    return this.http.put(`${this.personUrl}/${id}/status`,{status: status}, {headers})
+    return this.http.put(`${this.personUrl}/${id}/status`,{status: status})
       .toPromise()
       .then(() => null);
   }
 
   update(person: Person): Promise<Person> {
-    const headers = new HttpHeaders()
-    .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
-    .append('Content-Type', 'application/json');
+    // const headers = new HttpHeaders()
+    // .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+    // .append('Content-Type', 'application/json');
 
-    return this.http.put<Person>(`${this.personUrl}/${person.id}`, person, {headers})
+    return this.http.put<Person>(`${this.personUrl}/${person.id}`, person)
         .toPromise()
         .then(response => {
           const personUpdated = response as Person;
@@ -95,10 +95,10 @@ export class PersonService {
   }
 
   findById(id: number): Promise<Person> {
-    const headers = new HttpHeaders()
-    .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+    // const headers = new HttpHeaders()
+    // .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-    return this.http.get(`${this.personUrl}/${id}`, {headers})
+    return this.http.get(`${this.personUrl}/${id}`)
       .toPromise()
       .then(response => {
         const person = response as Person;

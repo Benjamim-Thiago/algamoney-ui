@@ -8,6 +8,11 @@ import { SecurityRoutingModule } from './security-routing.module';
 
 import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 
+
+export function tokenGetter(): string {
+  return localStorage.getItem('token');
+}
+
 @NgModule({
   declarations: [LoginFormComponent],
   imports: [
@@ -19,9 +24,9 @@ import { JwtHelperService, JwtModule } from '@auth0/angular-jwt';
 
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => {
-          return '';
-        }
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['localhost:8080'],
+        blacklistedRoutes: ['http://localhost:8080/oauth/token']
       }
   })
   ],
