@@ -13,12 +13,14 @@ import { PostingService } from '../postings/posting.service';
 import { RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { AuthService } from '../security/auth.service';
+import { NotAuthorizedComponent } from './not-authorized.component';
 
 
 @NgModule({
   declarations: [
     NavbarComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    NotAuthorizedComponent
   ],
   imports: [
     CommonModule,

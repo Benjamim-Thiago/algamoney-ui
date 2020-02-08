@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import {ConfirmationService} from 'primeng/api';
 import { LazyLoadEvent} from 'primeng/api/public_api';
@@ -9,7 +10,7 @@ import { ToastyService } from 'ng2-toasty';
 import { PostingService, PostingFilter } from '../posting.service';
 import { CalendarTranslateService } from 'src/app/calendar-translate.service';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { Title } from '@angular/platform-browser';
+import { AuthService } from 'src/app/security/auth.service';
 
 @Component({
   selector: 'app-postings-list',
@@ -34,6 +35,7 @@ export class PostingsListComponent implements OnInit {
   constructor(
     private postingService: PostingService,
     private errorHandlerService: ErrorHandlerService,
+    public authService: AuthService,
     private toastyService: ToastyService,
     private confirmationService: ConfirmationService,
     private title: Title) {}

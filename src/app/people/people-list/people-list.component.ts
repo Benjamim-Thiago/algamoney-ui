@@ -37,7 +37,7 @@ export class PeopleListComponent implements OnInit {
     .then(result => {
       this.totalRegister = result.total;
       this.people = result.people;
-    });
+    }).catch(error => this.errorHandlerService.handle(error));
   }
 
   changingPage(event: LazyLoadEvent) {

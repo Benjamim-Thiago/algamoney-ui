@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { NgForm } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
+import { Router, ActivatedRoute } from '@angular/router';
+
 import { Person } from 'src/app/models/person';
+import { Address } from 'src/app/models/address';
 import { PersonService } from '../person.service';
 import { ToastyService } from 'ng2-toasty';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Title } from '@angular/platform-browser';
-import { Address } from 'src/app/models/address';
 
 
 @Component({
@@ -37,7 +38,7 @@ export class PersonRegisterComponent implements OnInit {
     return Boolean(this.person.id);
   }
 
-  new(form: FormControl) {
+  new(form: NgForm) {
     form.reset();
     setTimeout(function() {
       this.person = new Person();
@@ -56,7 +57,7 @@ export class PersonRegisterComponent implements OnInit {
       this.editTitlePageModeEditing();
     }).catch(error => this.errorHandlerService.handle(error));
   }
-  save(form: FormControl) {
+  save(form: NgForm) {
     if (this.editing) {
       this.alterPerson(form);
     } else {
@@ -64,7 +65,7 @@ export class PersonRegisterComponent implements OnInit {
     }
   }
 
-  addPerson(form: FormControl) {
+  addPerson(form: NgForm) {
     if (this.person.address.zipcode) {
       this.person.address.zipcode = this.person.address.zipcode
       .replace('.', '')
@@ -80,7 +81,7 @@ export class PersonRegisterComponent implements OnInit {
 
       }).catch(error => this.errorHandlerService.handle(error));
   }
-  alterPerson(form: FormControl) {
+  alterPerson(form: NgForm) {
     if (this.person.address.zipcode) {
       this.person.address.zipcode = this.person.address.zipcode
       .replace('.', '')

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import * as moment from 'moment';
 import { Posting } from '../models/posting';
+import { environment } from 'src/environments/environment';
 
 export class PostingFilter {
   description: string;
@@ -17,8 +18,10 @@ export class PostingFilter {
   providedIn: 'root'
 })
 export class PostingService {
-  postingUrl = 'http://localhost:8080/postings';
-  constructor(private http: HttpClient) { }
+  postingUrl: string;
+  constructor(private http: HttpClient) {
+    this.postingUrl = `${environment.apiUrl}/postings`;
+  }
 
   search(filter: PostingFilter): Promise<any> {
     let params = new HttpParams();

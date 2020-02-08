@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { observable } from 'rxjs';
 import { Person } from '../models/person';
+import { environment } from 'src/environments/environment';
 
 export class PersonFilter {
   name: string;
@@ -15,9 +16,11 @@ export class PersonFilter {
 })
 export class PersonService {
 
-  personUrl = 'http://localhost:8080/people';
+  personUrl: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.personUrl = `${environment.apiUrl}/people`;
+  }
 
   listAll(): Promise<any> {
     // const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');

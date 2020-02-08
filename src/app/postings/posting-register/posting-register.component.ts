@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { CalendarTranslateService } from 'src/app/calendar-translate.service';
@@ -59,7 +59,7 @@ export class PostingRegisterComponent implements OnInit {
     return Boolean(this.posting.id);
   }
 
-  new(form: FormControl) {
+  new(form) {
     form.reset();
     setTimeout(function() {
       this.posting = new Posting();
@@ -76,7 +76,7 @@ export class PostingRegisterComponent implements OnInit {
     }).catch(error => this.errorHandlerService.handle(error));
   }
 
-  save(form: FormControl) {
+  save(form) {
     if (this.editing) {
       this.alterPosting(form);
     } else {
@@ -84,7 +84,7 @@ export class PostingRegisterComponent implements OnInit {
     }
   }
 
-  addPosting(form: FormControl) {
+  addPosting(form) {
     this.postingService.save(this.posting)
       .then(postingInsert => {
         this.toastyService.success('Lançamento cadastrado com sucesso.');
@@ -95,7 +95,7 @@ export class PostingRegisterComponent implements OnInit {
       }).catch(error => this.errorHandlerService.handle(error));
   }
 
-  alterPosting(form: FormControl) {
+  alterPosting(form) {
     this.postingService.update(this.posting)
       .then(posting => {
         this.posting = posting;
