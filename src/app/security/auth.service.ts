@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ɵConsole } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
@@ -16,6 +16,7 @@ export class AuthService {
     private http: HttpClient,
     private jwtHelper: JwtHelperService) {
       this.oauthTokenUrl = `${environment.apiUrl}/oauth/token`;
+      console.log(this.oauthTokenUrl);
       this.tokensRevokeUrl = `${environment.apiUrl}/tokens/revoke`;
       this.loadToken();
     }
