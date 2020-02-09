@@ -4,9 +4,13 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080',
-  whitelistedDomains: 'localhost:8080',
-  blacklistedRoutes: 'http://localhost:8080/oauth/token'
+  // apiUrl: 'http://localhost:8080',
+  // whitelistedDomains: 'localhost:8080',
+  // blacklistedRoutes: 'http://localhost:8080/oauth/token'
+
+  apiUrl: 'https://algamoney-api-btsoftware.herokuapp.com',
+  whitelistedDomains: 'algamoney-api-btsoftware.herokuapp.com',
+  blacklistedRoutes: 'https://algamoney-api-btsoftware.herokuapp.com/oauth/token'
 };
 
 /*
