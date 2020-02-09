@@ -12,6 +12,7 @@ import { SecurityRoutingModule } from './security-routing.module';
 
 import { MoneyHttpInterceptor } from './money-http-interceptor';
 import { AuthGuard } from './auth.guard';
+import { environment } from 'src/environments/environment';
 
 
 export function tokenGetter(): string {
@@ -30,8 +31,8 @@ export function tokenGetter(): string {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        whitelistedDomains: ['localhost:8080'],
-        blacklistedRoutes: ['http://localhost:8080/oauth/token']
+        whitelistedDomains: [environment.apiUrl],
+        blacklistedRoutes: [`${environment.apiUrl}/oauth/token`]
       }
   })
   ],
