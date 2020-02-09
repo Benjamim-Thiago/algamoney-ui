@@ -16,7 +16,6 @@ export class AuthService {
     private http: HttpClient,
     private jwtHelper: JwtHelperService) {
       this.oauthTokenUrl = `${environment.apiUrl}/oauth/token`;
-      console.log('teste: ' + this.oauthTokenUrl);
       this.tokensRevokeUrl = `${environment.apiUrl}/tokens/revoke`;
       this.loadToken();
     }
