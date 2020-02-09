@@ -13,6 +13,7 @@ import { SecurityRoutingModule } from './security-routing.module';
 import { MoneyHttpInterceptor } from './money-http-interceptor';
 import { AuthGuard } from './auth.guard';
 import { environment } from 'src/environments/environment';
+import { AuthService } from './auth.service';
 
 
 export function tokenGetter(): string {
