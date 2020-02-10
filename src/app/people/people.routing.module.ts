@@ -7,7 +7,7 @@ import { AuthGuard } from '../security/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'people',
+    path: '',
     component: PeopleListComponent,
     canActivate: [AuthGuard],
     data: {
@@ -15,7 +15,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'people/new',
+    path: 'new',
     component: PersonRegisterComponent,
     canActivate: [AuthGuard],
     data: {
@@ -23,7 +23,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'people/:id',
+    path: ':id',
     component: PersonRegisterComponent,
     canActivate: [AuthGuard],
     data: {
