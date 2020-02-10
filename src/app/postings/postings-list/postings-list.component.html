@@ -63,7 +63,7 @@
           <ng-template pTemplate="header">
             <tr>
                 <th>Pessoa</th>
-                <th>Descricao</th>
+                https://www.primefaces.org/primeng/#/             <th>Descricao</th>
                 <th class="col-date-header">Vencimento</th>
                 <th class="col-date-header">Pagamento</th>
                 <th class="col-value-header">Valor</th>
@@ -75,7 +75,7 @@
               <td>
                 <span class="ui-column-title">Pessoa</span>
                 {{posting.person}}
-              </td>
+                https://www.primefaces.org/primeng/#/           </td>
               <td>
                 <span class="ui-column-title">Descrição</span>
                 {{posting.description}}
@@ -95,7 +95,7 @@
                 {{posting.value | number: '1.2-2'}}</td>
               <td class="col-acoes">
                 <span class="ui-column-title">Ações</span>
-                <a pButton [routerLink]="['/postings', posting.id]" icon="pi pi-pencil" class="ui-button-warning" pTooltip="Editar" tooltipPosition="top"></a>&nbsp;
+                <button pButton [routerLink]="['/postings', posting.id]" icon="pi pi-pencil" class="ui-button-warning" pTooltip="Editar" tooltipPosition="top"></button>&nbsp;
                 <button pButton icon="pi pi-trash" class="ui-button-danger"
                   pTooltip="Excluir" [disabled]="!authService.hasPermission('ROLE_REMOVER_LANCAMENTO')"
                   tooltipPosition="top" (click)="confirmRemove(posting)"></button>
