@@ -4,10 +4,10 @@
       <h1>{{ editing ? 'Edição de' : 'Novo' }} lançamento</h1>
     </div>
   </div>
-  <form #f="ngForm" autocomplete="off" (ngSubmit)="save(f)">
+  <form autocomplete="off" (ngSubmit)="save()" [formGroup]="form">
     <div class="ui-g">
       <div class="ui-g-12">
-        <p-selectButton name="type" [options]="types" #type [(ngModel)]="posting.type"></p-selectButton>
+        <p-selectButton name="type" [options]="types" formControlName="type"></p-selectButton>
       </div>
       <div class="ui-g-6 ui-md-3 ui-fluid">
         <label for="">Vencimento</label>
@@ -17,13 +17,15 @@
           [readonlyInput]="false"
           [yearNavigator]="true"
           yearRange="1920:2030"
-          [showIcon]="true" name="expirationDate"
-          ngModel #expiration="ngModel" [(ngModel)]="posting.expirationDate" required>
+          [showIcon]="true"
+          name="expirationDate"
+          formControlName="expirationDate">
         </p-calendar>
-        <app-message [control]="expiration" error="required" text="Informe o vencimento"></app-message>
+        <app-message [control]="form.get('expirationDate')"
+          error="required" text="Informe o vencimento"></app-message>
       </div>
       <div class="ui-g-6 ui-md-3 ui-fluid">
-        <label for="">{{type.value == 'RECEITA' ? 'Recebimento' : 'Pagamento'}}</label>
+        <label for="">{{form.get('type').value === 'RECEITA' ? 'Recebimento' : 'Pagamento'}}</label>
         <p-calendar
           [locale]="ptbr"
           dateFormat="dd/mm/yy"
@@ -31,7 +33,7 @@
           [yearNavigator]="true"
           yearRange="1920:2030"
           [showIcon]="true"
-          [(ngModel)]="posting.paymentDate"
+          formControlName="paymentDate"
           name="paymentDate">
         </p-calendar>
       </div>
@@ -39,34 +41,31 @@
     <div class="ui-g">
       <div class="ui-g-12 ui-md-9 ui-fluid">
         <label for="">Descrição</label>
-        <input type="text" pInputText name="description" [(ngModel)]="posting.description"
-          ngModel #description="ngModel" required minlength="3">
+        <input type="text" pInputText name="description" formControlName="description">
 
-          <app-message [control]="description" error="required" text="Informe a descrição"></app-message>
-          <app-message [control]="description" error="minlength" text="informe no mínimo {{description.errors?.minlength?.requiredLength}} caracteres."></app-message>
+          <app-message [control]="form.get('description')" error="required" text="Informe a descrição"></app-message>
+          <app-message [control]="form.get('description')" error="minlength"
+            text="informe no mínimo {{form.get('description').errors?.minlength?.requiredLength}} caracteres."></app-message>
         </div>
 
       <div class="ui-g-12 ui-md-3 ui-fluid">
         <label for="">Valor</label>
-        <input type="text" pInputText name="value" [(ngModel)]="posting.value"
-          ngModel #value="ngModel"
-          currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' , allowNegative: false}" required>
+        <input type="text" pInputText name="value" formControlName="value"
+          currencyMask [options]="{ prefix: '', thousands: '.', decimal: ',' , allowNegative: false}">
       </div>
     </div>
     <div class="ui-g">
-      <div class="ui-g-12 ui-md-6 ui-fluid">
+      <div class="ui-g-12 ui-md-6 ui-fluid" formGroupName="category">
         <label for="">Categoria</label>
         <p-dropdown [options]="categories"
-         [(ngModel)]="posting.category.id" placeholder="Selecione"
-         name="category" ngModel #category="ngModel" required>
+         placeholder="Selecione" name="category" formControlName="id">
         </p-dropdown>
       </div>
 
-      <div class="ui-g-12 ui-md-6 ui-fluid">
+      <div class="ui-g-12 ui-md-6 ui-fluid" formGroupName="person">
         <label for="">Pessoa</label>
         <p-dropdown [options]="people" filter="true"
-         [(ngModel)]="posting.person.id"
-         placeholder="Selecione" name="person" ngModel #person="ngModel" required>
+         placeholder="Selecione" name="person" formControlName="id">
         </p-dropdown>
       </div>
     </div>
@@ -74,13 +73,13 @@
       <div class="ui-g-12 ui-fluid">
         <label for="">Observação</label>
         <textarea type="text" pInputTextarea rows="3"
-        name="comments" [(ngModel)]="posting.comments"></textarea>
+        name="comments" formControlName="comments"></textarea>
       </div>
 
       <div class="ui-g-12">
-        <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="f.invalid"></button>
+        <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="form.invalid"></button>
         &nbsp;
-        <button pButton (click)="new(f)" type="button" label="Novo" class="ui-button-info"></button>
+        <button pButton (click)="new()" type="button" label="Novo" class="ui-button-info"></button>
         &nbsp;
         <a routerLink="/postings">Voltar para listagem</a>
       </div>

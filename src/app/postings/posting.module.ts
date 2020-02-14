@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { TooltipModule } from 'primeng/tooltip';
@@ -27,6 +27,8 @@ import { PostingRegisterComponent } from './posting-register/posting-register.co
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
+
     InputTextModule,
     InputTextareaModule,
     SelectButtonModule,

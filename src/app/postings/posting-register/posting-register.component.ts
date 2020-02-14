@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { CalendarTranslateService } from 'src/app/calendar-translate.service';
@@ -27,7 +27,8 @@ export class PostingRegisterComponent implements OnInit {
     {label: 'Despesa', value: 'DESPESA'}
   ];
 
-  posting = new Posting();
+  form: FormGroup;
+  // posting = new Posting();
   categories = [];
 
   people = [];
@@ -40,10 +41,12 @@ export class PostingRegisterComponent implements OnInit {
     private errorHandlerService: ErrorHandlerService,
     private route: ActivatedRoute,
     private router: Router,
-    private title: Title
+    private title: Title,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.configureForm();
     const postingCode = this.route.snapshot.params['id'];
     this.title.setTitle('Novo lançamento');
     if (postingCode) {
@@ -55,12 +58,32 @@ export class PostingRegisterComponent implements OnInit {
     this.loadPeople();
   }
 
-  get editing() {
-    return Boolean(this.posting.id);
+  configureForm() {
+    this.form = this.formBuilder.group({
+      id: [],
+      type: [ 'RECEITA', Validators.required ],
+      expirationDate: [ null, Validators.required ],
+      paymentDate: [],
+      description: [null, [ Validators.required, Validators.minLength(5) ]],
+      value: [ null, Validators.required ],
+      person: this.formBuilder.group({
+        id: [ null, Validators.required ],
+        name: []
+      }),
+      category: this.formBuilder.group({
+        id: [ null, Validators.required ],
+        name: []
+      }),
+      comments: []
+    });
   }
 
-  new(form) {
-    form.reset();
+  get editing() {
+    return Boolean(this.form.get('id').value);
+  }
+
+  new() {
+    this.form.reset();
     setTimeout(function() {
       this.posting = new Posting();
     }.bind(this), 1);
@@ -71,34 +94,32 @@ export class PostingRegisterComponent implements OnInit {
   loadPosting(id: number) {
     this.postingService.findById(id)
     .then(posting => {
-      this.posting = posting;
+      this.form.patchValue(posting);
       this.editTitlePageModeEditing();
     }).catch(error => this.errorHandlerService.handle(error));
   }
 
-  save(form) {
+  save() {
     if (this.editing) {
-      this.alterPosting(form);
+      this.alterPosting();
     } else {
-      this.addPosting(form);
+      this.addPosting();
     }
   }
 
-  addPosting(form) {
-    this.postingService.save(this.posting)
+  addPosting() {
+    this.postingService.save(this.form.value)
       .then(postingInsert => {
         this.toastyService.success('Lançamento cadastrado com sucesso.');
-        //form.reset();
-        //this.posting = new Posting();
         this.router.navigate(['/postings', postingInsert.id]);
 
       }).catch(error => this.errorHandlerService.handle(error));
   }
 
-  alterPosting(form) {
-    this.postingService.update(this.posting)
+  alterPosting() {
+    this.postingService.update(this.form.value)
       .then(posting => {
-        this.posting = posting;
+        this.form.patchValue(posting);
 
         this.toastyService.success('Lançamento alterado com sucesso.');
         this.editTitlePageModeEditing();
@@ -120,6 +141,6 @@ export class PostingRegisterComponent implements OnInit {
   }
 
   editTitlePageModeEditing() {
-    this.title.setTitle(`Edição de lançamento: ${this.posting.description}`);
+    this.title.setTitle(`Edição de lançamento: ${this.form.get('description').value}`);
   }
 }
