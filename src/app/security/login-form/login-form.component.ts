@@ -19,7 +19,7 @@ export class LoginFormComponent implements OnInit {
   login(email: string, password: string) {
     this.authService.login(email, password)
     .then(() => {
-      this.router.navigate(['/postings']);
+      this.router.navigate(['/dashboard']);
     })
     .catch(error => {
       this.errorHandlerService.handle(error);

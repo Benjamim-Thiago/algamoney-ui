@@ -15,8 +15,13 @@ const routes: Routes = [
     loadChildren: () => import('./people/person.module')
     .then(m => m.PersonModule)
   },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module')
+    .then(m => m.DashboardModule)
+  },
 
-  { path: '', redirectTo: 'postings', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'not-authorized', component: NotAuthorizedComponent },
   { path: 'page-not-found', component: PageNotFoundComponent },
   { path: '**', redirectTo: 'page-not-found' }
