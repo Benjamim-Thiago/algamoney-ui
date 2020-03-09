@@ -7,9 +7,12 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 
 import { NavbarComponent } from './navbar/navbar.component';
+
 import { ErrorHandlerService } from './error-handler.service';
 import { PersonService } from '../people/person.service';
 import { PostingService } from '../postings/posting.service';
+import { DashboardService } from '../dashboard/dashboard.service';
+
 import { RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found.component';
 import { AuthService } from '../security/auth.service';
@@ -37,6 +40,7 @@ import { NotAuthorizedComponent } from './not-authorized.component';
   providers: [
     PostingService,
     PersonService,
+    DashboardService,
     ErrorHandlerService,
     AuthService,
 
