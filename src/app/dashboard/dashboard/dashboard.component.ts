@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from '../dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,15 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  pieChartData = {
-    labels: ['Mensal', 'Educação', 'Lazer', 'Imprevistos'],
-    datasets: [
-      {
-        data: [2500, 2700, 550, 235],
-        backgroundColor: ['#FF9900', '#109618', '#990099', '#3B3EAC']
-      }
-    ]
-  };
+  pieChartData: any;
   lineChartData = {
     labels: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
     datasets: [
@@ -30,9 +23,25 @@ export class DashboardComponent implements OnInit {
     ]
   };
 
-  constructor() { }
+  constructor(private  dashboardService: DashboardService) { }
 
   ngOnInit() {
+    this.configurateChartPizza();
   }
 
+  configurateChartPizza() {
+    this.dashboardService.postingsPerCategory()
+      .then(datas => {
+        this.pieChartData = {
+          labels: datas.map(data => data.category.name),
+          datasets: [
+            {
+              data: datas.map(data => data.total),
+              backgroundColor: ['#FF9900', '#109618', '#990099', '#3B3EAC', '#0099C6',
+                                  '#DD4477', '#3366CC', '#DC3912']
+            }
+          ]
+        };
+      });
+  }
 }
