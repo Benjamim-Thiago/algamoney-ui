@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../dashboard.service';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,25 +9,28 @@ import { DashboardService } from '../dashboard.service';
 })
 export class DashboardComponent implements OnInit {
   pieChartData: any;
-  lineChartData = {
-    labels: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-    datasets: [
-      {
-        label: 'Receitas',
-        data: [4, 10, 18, 5, 1, 20, 3],
-        borderColor: '#3366CC'
-      }, {
-        label: 'Despesas',
-        data: [10, 15, 8, 5, 1, 7, 9],
-        borderColor: '#D62B00'
+  lineChartData: any ;
+
+  options = {
+    tooltips: {
+      callbacks: {
+        label: (tooltipItem, data) => {
+          const dataset = data.datasets[tooltipItem.datasetIndex];
+          const value = dataset.data[tooltipItem.index];
+          const label = dataset.label ? (dataset.label + ': ') : '';
+
+          return label + this.decimalPipe.transform(value, '1.2-2');
+        }
       }
-    ]
+    }
   };
 
-  constructor(private  dashboardService: DashboardService) { }
+
+  constructor(private  dashboardService: DashboardService, private decimalPipe: DecimalPipe) { }
 
   ngOnInit() {
     this.configurateChartPizza();
+    this.configurateChartLine();
   }
 
   configurateChartPizza() {
@@ -43,5 +47,69 @@ export class DashboardComponent implements OnInit {
           ]
         };
       });
+  }
+
+  configurateChartLine() {
+    this.dashboardService.postingsPerDay()
+      .then(datas => {
+        const daysOfMonth = this.configurateDaysMonth();
+        const totalsReceitas = this.totalsPerDayMonth(
+          datas.filter(data => data.type === 'RECEITA'), daysOfMonth);
+        const totalsDespesas = this.totalsPerDayMonth(
+          datas.filter(data => data.type === 'DESPESA'), daysOfMonth);
+
+        this.lineChartData = {
+          labels: daysOfMonth,
+          datasets: [
+            {
+              label: 'Receitas',
+              data: totalsReceitas,
+              borderColor: '#3366CC'
+            },
+            {
+              label: 'Despesas',
+              data: totalsDespesas,
+              borderColor: '#D62B00'
+            }
+          ]
+        }
+      });
+  }
+
+
+  private totalsPerDayMonth(datas, daysOfMonth) {
+    const totals: number[] = [];
+    for (const day of daysOfMonth) {
+      let total = 0;
+
+      for (const data of datas) {
+
+        if ((new Date(data.day).getDate() + 1) === day) {
+          total = data.total;
+
+          break;
+        }
+      }
+
+      totals.push(total);
+    }
+
+    return totals;
+  }
+
+  private configurateDaysMonth() {
+    const referenceMonth = new Date();
+    referenceMonth.setMonth(referenceMonth.getMonth() + 1);
+    referenceMonth.setDate(0);
+
+    const amountDays = referenceMonth.getDate();
+
+    const days: number[] = [];
+
+    for (let i = 1; i <= amountDays; i++) {
+      days.push(i);
+    }
+
+    return days;
   }
 }

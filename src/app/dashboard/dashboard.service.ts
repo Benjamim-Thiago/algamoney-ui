@@ -16,7 +16,6 @@ export class DashboardService {
   }
 
   postingsPerCategory(): Promise<Array<any>> {
-    console.log(`${this.postingUrl}/statistics/per-category`);
     return this.http.get(`${this.postingUrl}/statistics/per-category`)
       .toPromise()
       .then(response => response as Array<any>);

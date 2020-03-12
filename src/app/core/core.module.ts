@@ -12,6 +12,7 @@ import { ErrorHandlerService } from './error-handler.service';
 import { PersonService } from '../people/person.service';
 import { PostingService } from '../postings/posting.service';
 import { DashboardService } from '../dashboard/dashboard.service';
+import { ReportService } from '../reports/report.service';
 
 import { RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found.component';
@@ -41,6 +42,7 @@ import { NotAuthorizedComponent } from './not-authorized.component';
     PostingService,
     PersonService,
     DashboardService,
+    ReportService,
     ErrorHandlerService,
     AuthService,
 
