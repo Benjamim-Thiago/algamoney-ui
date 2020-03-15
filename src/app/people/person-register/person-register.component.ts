@@ -8,6 +8,7 @@ import { Address } from 'src/app/models/address';
 import { PersonService } from '../person.service';
 import { ToastyService } from 'ng2-toasty';
 import { ErrorHandlerService } from 'src/app/core/error-handler.service';
+import { Contact } from 'src/app/models/contact';
 
 
 @Component({
@@ -17,6 +18,8 @@ import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 })
 export class PersonRegisterComponent implements OnInit {
   person = new Person();
+  contact: Contact;
+  displayContactForm: boolean;
   constructor(
     private personService: PersonService,
     private toastyService: ToastyService,
@@ -26,6 +29,7 @@ export class PersonRegisterComponent implements OnInit {
     private title: Title
   ) { }
 
+
   ngOnInit() {
     const personCode = this.route.snapshot.params['id'];
     this.title.setTitle('Nova pessoa');
@@ -33,6 +37,25 @@ export class PersonRegisterComponent implements OnInit {
       this.loadPerson(personCode);
     }
   }
+
+  prepareNewContact() {
+    this.displayContactForm = true;
+    this.contact = new Contact();
+  }
+
+  confirmeContact(frm: NgForm) {
+    this.person.contacts.push(this.cloneContact(this.contact));
+
+    this.displayContactForm = false;
+
+    frm.reset();
+  }
+
+  cloneContact(contact: Contact): Contact {
+    return new Contact(contact.id,
+      contact.name, contact.email, contact.phoneNumber);
+  }
+
 
   get editing() {
     return Boolean(this.person.id);

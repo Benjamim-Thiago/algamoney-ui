@@ -54,6 +54,15 @@
 
     <div class="ui-g">
       <div class="ui-g-12">
+        <button
+          pButton type="button" label="Novo Contato" class="ui-button-info" icon="pi pi-plus"
+          (click)="prepareNewContact()"
+        ></button>
+      </div>
+    </div>
+
+    <div class="ui-g">
+      <div class="ui-g-12">
         <p-panel header="Contatos">
           <div class="ui-g">
             <div class="ui-g-12">
@@ -107,3 +116,36 @@
     </div>
   </form>
 </div>
+<p-dialog header="Novo Contato" [(visible)]="displayContactForm" modal="modal" *ngIf="contact">
+  <form #frmContact="ngForm" (ngSubmit)="confirmeContact(frmContact)">
+    <div class="ui-g-12 ui-fluid">
+      <label>Nome</label>
+
+      <input pInputText type="text" name="name"
+        required [(ngModel)]="contact.name" #contactName="ngModel"/>
+
+      <app-message [control]="contactName" error="required" text="Informe o nome"></app-message>
+    </div>
+
+    <div class="ui-g-12 ui-fluid">
+        <label>E-mail</label>
+
+        <input pInputText type="email" name="email"
+          required email [(ngModel)]="contact.email" #contactEmail="ngModel"/>
+
+        <app-message [control]="contactEmail" error="required" text="Informe o email"></app-message>
+        <app-message [control]="contactEmail" error="email" text="Informe um e-mail válido"></app-message>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+          <label>Telefone</label>
+
+          <p-inputMask name="phoneNumber" [(ngModel)]="contact.phoneNumber"
+            mask="(99) 99999-999?9"></p-inputMask>
+      </div>
+
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Confirmar" [disabled]="frmContact.invalid"></button>
+      </div>
+  </form>
+</p-dialog>
