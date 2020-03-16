@@ -15,11 +15,13 @@ import { SharedModule } from './../shared/shared.module';
 
 import { PeopleListComponent } from './people-list/people-list.component';
 import { PeopleRoutingModule } from './people.routing.module';
+import { PersonRegisterContactComponent } from './person-register-contact/person-register-contact.component';
 
 @NgModule({
   declarations: [
     PeopleListComponent,
-    PersonRegisterComponent
+    PersonRegisterComponent,
+    PersonRegisterContactComponent
   ],
   imports: [
     CommonModule,

@@ -18,8 +18,7 @@ import { Contact } from 'src/app/models/contact';
 })
 export class PersonRegisterComponent implements OnInit {
   person = new Person();
-  contact: Contact;
-  displayContactForm: boolean;
+
   constructor(
     private personService: PersonService,
     private toastyService: ToastyService,
@@ -37,25 +36,6 @@ export class PersonRegisterComponent implements OnInit {
       this.loadPerson(personCode);
     }
   }
-
-  prepareNewContact() {
-    this.displayContactForm = true;
-    this.contact = new Contact();
-  }
-
-  confirmeContact(frm: NgForm) {
-    this.person.contacts.push(this.cloneContact(this.contact));
-
-    this.displayContactForm = false;
-
-    frm.reset();
-  }
-
-  cloneContact(contact: Contact): Contact {
-    return new Contact(contact.id,
-      contact.name, contact.email, contact.phoneNumber);
-  }
-
 
   get editing() {
     return Boolean(this.person.id);
@@ -104,6 +84,7 @@ export class PersonRegisterComponent implements OnInit {
 
       }).catch(error => this.errorHandlerService.handle(error));
   }
+
   alterPerson(form: NgForm) {
     if (this.person.address.zipcode) {
       this.person.address.zipcode = this.person.address.zipcode
