@@ -11,6 +11,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
+import { FileUploadModule } from 'primeng/fileupload';
 
 import { PostingRoutingModule } from './posting-routing.module';
 import { SharedModule } from './../shared/shared.module';
@@ -37,6 +38,7 @@ import { PostingRegisterComponent } from './posting-register/posting-register.co
     ButtonModule,
     TableModule,
     TooltipModule,
+    FileUploadModule,
     CurrencyMaskModule,
 
     SharedModule,

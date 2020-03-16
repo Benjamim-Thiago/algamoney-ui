@@ -11,4 +11,6 @@ export class Posting {
   comments: string;
   category = new Category();
   person = new Person();
+  anexo: string;
+  urlAnexo: string
 }

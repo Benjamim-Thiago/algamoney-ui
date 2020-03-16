@@ -74,7 +74,9 @@ export class PostingRegisterComponent implements OnInit {
         id: [ null, Validators.required ],
         name: []
       }),
-      comments: []
+      comments: [],
+      anexo: [],
+      urlanexo: []
     });
   }
 
@@ -142,5 +144,27 @@ export class PostingRegisterComponent implements OnInit {
 
   editTitlePageModeEditing() {
     this.title.setTitle(`Edição de lançamento: ${this.form.get('description').value}`);
+  }
+
+  get urlUploadAnexo() {
+    return this.postingService.urlUploadAnexo();
+  }
+
+  whenFinishedUpload(event) {
+    const anexo = event.originalEvent.body;
+    this.form.patchValue({
+      anexo: anexo.name,
+      urlAnexo: anexo.url
+    })
+  }
+
+  get nameAnexo() {
+    const name = this.form.get('anexo').value;
+
+    if (name) {
+      return name.substring(name.indexOf('_') + 1, name.length);
+    }
+
+    return '';
   }
 }

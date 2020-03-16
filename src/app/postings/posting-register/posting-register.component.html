@@ -74,6 +74,20 @@
         <label for="">Observação</label>
         <textarea type="text" pInputTextarea rows="3"
         name="comments" formControlName="comments"></textarea>
+
+      </div>
+
+      <div class="ui-g-6 ui-g-offset-6 ui-md-2 ui-md-offset-10 ui-fluid"
+      *ngIf="!form.get('anexo').value">
+        <p-fileUpload name="anexo" mode="basic" auto="true" maxFileSize="100000000"
+          chooseLabel="Anexar" accept="image/*,application/*"
+          [url]="urlUploadAnexo" (onUpload)="whenFinishedUpload($event)"></p-fileUpload>
+      </div>
+
+      <div class="ui-g-12 ui-fluid" dir="rtl"
+        *ngIf="form.get('anexo').value">
+        <a target="_blank" pTooltip="Baixar anexo" tooltipPosition="top"
+          [href]="form.get('urlAnexo').value">{{ nameAnexo }}</a>
       </div>
 
       <div class="ui-g-12">

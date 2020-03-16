@@ -97,6 +97,11 @@ export class PostingService {
       });
   }
 
+  urlUploadAnexo(): string {
+    return `${this.postingUrl}/anexo`;
+  }
+
+
   private convertStringsForDates(postings: Posting[]) {
     for (const posting of postings) {
       posting.expirationDate = moment(posting.expirationDate,
