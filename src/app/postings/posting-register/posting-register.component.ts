@@ -19,8 +19,11 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./posting-register.component.css']
 })
 export class PostingRegisterComponent implements OnInit {
+
   private calendarTranslate = new CalendarTranslateService();
   ptbr: any;
+
+  progressSpinnerUploadVisible: boolean = false;
 
   types = [
     {label: 'Receita', value: 'RECEITA'},
@@ -76,7 +79,7 @@ export class PostingRegisterComponent implements OnInit {
       }),
       comments: [],
       anexo: [],
-      urlanexo: []
+      urlAnexo: []
     });
   }
 
@@ -146,16 +149,34 @@ export class PostingRegisterComponent implements OnInit {
     this.title.setTitle(`Edição de lançamento: ${this.form.get('description').value}`);
   }
 
+  firstUploadAnexo() {
+    this.progressSpinnerUploadVisible = true;
+  }
+
   get urlUploadAnexo() {
     return this.postingService.urlUploadAnexo();
   }
 
   whenFinishedUpload(event) {
-    const anexo = event.originalEvent.body;
+    let anexo = event.originalEvent.body;
     this.form.patchValue({
       anexo: anexo.name,
       urlAnexo: anexo.url
-    })
+    });
+
+    this.progressSpinnerUploadVisible = false;
+  }
+
+  removeAnexo() {
+    this.form.patchValue({
+      anexo: null,
+      urlAnexo: null
+    });
+  }
+
+  errorUpload(event) {
+    this.toastyService.error('Erro ao tentar enviar anexo!');
+    this.progressSpinnerUploadVisible = false;
   }
 
   get nameAnexo() {

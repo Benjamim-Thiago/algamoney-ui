@@ -12,6 +12,7 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { FileUploadModule } from 'primeng/fileupload';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 import { PostingRoutingModule } from './posting-routing.module';
 import { SharedModule } from './../shared/shared.module';
@@ -39,6 +40,7 @@ import { PostingRegisterComponent } from './posting-register/posting-register.co
     TableModule,
     TooltipModule,
     FileUploadModule,
+    ProgressSpinnerModule,
     CurrencyMaskModule,
 
     SharedModule,

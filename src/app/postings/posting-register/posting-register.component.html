@@ -81,17 +81,30 @@
       *ngIf="!form.get('anexo').value">
         <p-fileUpload name="anexo" mode="basic" auto="true" maxFileSize="100000000"
           chooseLabel="Anexar" accept="image/*,application/*"
-          [url]="urlUploadAnexo" (onUpload)="whenFinishedUpload($event)"></p-fileUpload>
+          [url]="urlUploadAnexo"
+          (onBeforeUpload)="firstUploadAnexo()"
+          (onUpload)="whenFinishedUpload($event)"
+          (onError)="errorUpload($event)"></p-fileUpload>
+
+          <p-progressSpinner
+            [hidden]="!progressSpinnerUploadVisible"
+            [style]="{width: '25px', height: '25px' }"
+          ></p-progressSpinner>
       </div>
 
       <div class="ui-g-12 ui-fluid" dir="rtl"
         *ngIf="form.get('anexo').value">
+
+        <button pButton type="button" class="ui-button-danger" style="margin-left: 5px;"
+          icon="pi pi-times" pTooltip="Remover anexo" tooltipPosition="top"
+          (click)="removeAnexo()"></button>
+
         <a target="_blank" pTooltip="Baixar anexo" tooltipPosition="top"
           [href]="form.get('urlAnexo').value">{{ nameAnexo }}</a>
       </div>
 
       <div class="ui-g-12">
-        <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="form.invalid"></button>
+        <button pButton type="submit" label="Salvar" class="ui-button-success" [disabled]="form.invalid || progressSpinnerUploadVisible"></button>
         &nbsp;
         <button pButton (click)="new()" type="button" label="Novo" class="ui-button-info"></button>
         &nbsp;
