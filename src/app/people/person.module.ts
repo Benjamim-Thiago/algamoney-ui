@@ -8,8 +8,9 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputMaskModule } from 'primeng/inputmask';
 import { InputTextModule } from 'primeng/inputtext';
+import { DropdownModule } from 'primeng/dropdown';
 import { PanelModule } from 'primeng/panel';
-import {DialogModule} from 'primeng/dialog';
+import { DialogModule } from 'primeng/dialog';
 
 import { SharedModule } from './../shared/shared.module';
 
@@ -28,6 +29,7 @@ import { PersonRegisterContactComponent } from './person-register-contact/person
     FormsModule,
     InputTextModule,
     InputMaskModule,
+    DropdownModule,
     ButtonModule,
     TableModule,
     TooltipModule,

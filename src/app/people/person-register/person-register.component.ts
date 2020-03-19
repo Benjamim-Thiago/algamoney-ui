@@ -18,6 +18,10 @@ import { Contact } from 'src/app/models/contact';
 })
 export class PersonRegisterComponent implements OnInit {
   person = new Person();
+  states: any[];
+  cities: any[];
+
+  selectedState: number;
 
   constructor(
     private personService: PersonService,
@@ -32,6 +36,9 @@ export class PersonRegisterComponent implements OnInit {
   ngOnInit() {
     const personCode = this.route.snapshot.params['id'];
     this.title.setTitle('Nova pessoa');
+
+    this.loadEstados();
+
     if (personCode) {
       this.loadPerson(personCode);
     }
@@ -50,13 +57,36 @@ export class PersonRegisterComponent implements OnInit {
     this.router.navigate(['/people/new']);
   }
 
+  loadEstados() {
+    this.personService.listStates().then(list => {
+      this.states = list.map(uf => ({ label: uf.name, value: uf.id }));
+    })
+    .catch(erro => this.errorHandlerService.handle(erro));
+  }
+
+  loadCities() {
+    this.personService.findCitiesByStateId(this.selectedState).then(list => {
+      this.cities = list.map(c => ({ label: c.name, value: c.id }));
+    })
+    .catch(erro => this.errorHandlerService.handle(erro));
+  }
+
   loadPerson(id) {
     this.personService.findById(id)
     .then(person => {
       if (!person.address) {
         person.address = new Address();
       }
+
       this.person = person;
+
+      this.selectedState = (this.person.address.city) ? this.person.address.city.state.id : null;
+
+      if (this.selectedState) {
+        this.loadCities();
+      }
+
+
       this.editTitlePageModeEditing();
     }).catch(error => this.errorHandlerService.handle(error));
   }

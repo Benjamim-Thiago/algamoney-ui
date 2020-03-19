@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { observable } from 'rxjs';
-import { Person } from '../models/person';
+import { HttpClient, HttpParams } from '@angular/common/http';
+
 import { environment } from 'src/environments/environment';
+
+import { Person } from '../models/person';
+import { State } from '../models/state';
+import { City } from '../models/city';
 
 export class PersonFilter {
   name: string;
@@ -17,9 +20,13 @@ export class PersonFilter {
 export class PersonService {
 
   personUrl: string;
+  cityUrl: string;
+  stateUrl: string;
 
   constructor(private http: HttpClient) {
     this.personUrl = `${environment.apiUrl}/people`;
+    this.stateUrl = `${environment.apiUrl}/states`;
+    this.cityUrl = `${environment.apiUrl}/cities`;
   }
 
   listAll(): Promise<any> {
@@ -108,4 +115,20 @@ export class PersonService {
         return person;
       });
   }
+
+  listStates(): Promise<State[]> {
+    return this.http.get(this.stateUrl)
+      .toPromise()
+      .then(response => response as State[]);
+  }
+
+  findCitiesByStateId(state): Promise<City[]> {
+    let params = new HttpParams();
+    params = params.set('state', state);
+
+    return this.http.get(this.cityUrl, { params })
+      .toPromise()
+      .then(response => response as City[]);
+  }
+
 }

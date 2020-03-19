@@ -43,12 +43,22 @@
     </div>
     <div class="ui-g">
       <div class="ui-g-12 ui-md-6 ui-fluid">
-        <label for="">Cidade</label>
-        <input type="text" pInputText name="city" [(ngModel)]="person.address.city" ngModel #city="ngModel">
+        <label for="">Estado</label>
+        <p-dropdown
+          placeholder="Selecione" [filter]="true" [options]="states"
+          [(ngModel)]="selectedState" name="selectedState"
+          #state="ngModel"
+          (onChange)="loadCities()">
+        </p-dropdown>
       </div>
       <div class="ui-g-12 ui-md-6 ui-fluid">
-        <label for="">Estado</label>
-        <input type="text" pInputText name="state" [(ngModel)]="person.address.state" ngModel #state="ngModel">
+        <label for="">Cidade</label>
+        <p-dropdown
+          placeholder="Selecione" name="city"
+          [(ngModel)]="person.address.city.id" [filter]="true"
+          #city="ngModel" [options]="cities" [disabled]="!selectedState"
+          emptyFilterMessage="Nenhuma cidade localizada">
+        </p-dropdown>
       </div>
     </div>
 
