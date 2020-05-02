@@ -51,15 +51,14 @@ export class PersonService {
       params = params.set('name', filter.name);
     }
 
-
     return this.http.get(this.personUrl, { params })
       .toPromise()
       .then(response => {
-        const people = response['content']
+        const people = response['content'];
         const result = {
           people,
           total: response['totalElements']
-        }
+        };
         return result;
       });
   }

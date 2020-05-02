@@ -48,7 +48,7 @@ export class PostingService {
         const result = {
           postings,
           total: response['totalElements']
-        }
+        };
 
         return result;
     });
